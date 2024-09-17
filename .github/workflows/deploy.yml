@@ -1,0 +1,35 @@
+name: Deploy to Netlify
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to your branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # Specify the Node.js version
+
+      - name: Authenticate GitHub Packages
+        run: echo "//npm.pkg.github.com/:_authToken=${{secrets.GIT_TOKEN}} " > ~/.npmrc
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build applications
+        run: |
+          npx nx build application-1 --prod
+
+      - name: Deploy app 1 to Netlify (Replace with your site ID)
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}  # Replace with your app 1 site ID
+        run: npx netlify-cli deploy --prod --dir=dist/apps/application-1 --filter application-1
