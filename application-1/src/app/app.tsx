@@ -16,6 +16,9 @@ export function App() {
   return (
     <div>
      <SharedHeader navigation={navigation}/>
+     <div className='container'>
+      <h1 className='bg-orange-900 text-red-400'>Add This TItle </h1>
+     </div>
     </div>
   );
 }
