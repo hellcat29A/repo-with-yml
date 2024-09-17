@@ -32,4 +32,4 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}  # Replace with your app 1 site ID
-        run: npx netlify-cli deploy --prod --dir=dist/apps/application-1 --filter application-1
+        run: npx netlify-cli deploy --prod --dir=dist/application-1 --filter application-1
